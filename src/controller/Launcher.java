@@ -1,26 +1,23 @@
 package controller;
 
 import client.Client;
-import server.Server;
-import thread.Thread;
-
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Launcher {
 
 
     public static void main(String[] args) throws IOException {
-        Server server = new Server();
-       /* System.out.println("Starting server");
-        server.start(6666);*/
+
 
         Client client = new Client();
+        client.startConnection("192.168.1.146",6667);
+        Scanner keyboard = new Scanner(System.in);
+        while (true){
+            client.sendMessage(keyboard.nextLine());
+        }
 
-        Thread serverThread = new Thread(server);
-        Thread clientThread = new Thread(client);
 
-        clientThread.start();
-        serverThread.start();
 
 
 

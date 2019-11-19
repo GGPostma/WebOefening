@@ -1,14 +1,19 @@
 package controller;
 
+import gesprek.Gesprek;
 import server.Server;
 import thread.Thread;
 
 import java.io.IOException;
 
+
 public class LauncherServer {
-    public static void main(String[] args) throws IOException {
-        Server server1 = new Server();
-        Server server2 = new Server();
+    public static void main(String[] args) throws IOException, InterruptedException {
+
+        Gesprek gesprek = new Gesprek();
+
+        Server server1 = new Server(gesprek);
+        Server server2 = new Server(gesprek);
 
         server1.setPort(6666);
         server2.setPort(6667);
@@ -16,10 +21,16 @@ public class LauncherServer {
         Thread serverThread1 = new Thread(server1);
         Thread serverThread2 = new Thread(server2);
 
-        serverThread1.start();
-        serverThread2.start();
+        server1.getClientConnection();
+        server2.getClientConnection();
 
-        while (true){
+
+        boolean keepgoing = true;
+
+        while (keepgoing){
+
+            server1.getClientMessage();
+            server2.getClientMessage();
 
         }
 
