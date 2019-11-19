@@ -37,6 +37,7 @@ public class Client implements Runnable {
     public void run() {
         try {
             startConnection("192.168.1.148",6667);
+            sendMessage("test");
         } catch (IOException e) {
             e.printStackTrace();
         }

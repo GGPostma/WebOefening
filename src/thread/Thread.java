@@ -18,7 +18,7 @@ public class Thread extends java.lang.Thread {
     }
 
     public Thread(Server server) throws IOException {
-     server.run();
+        server.run();
     }
 
 

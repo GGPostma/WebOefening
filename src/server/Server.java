@@ -15,11 +15,12 @@ public class Server implements Runnable {
     private PrintWriter out;
     private BufferedReader in;
     private boolean keepgoing;
+    private int port;
 
-    public void start(int port) throws IOException {
-        serverSocket = new ServerSocket(port, 1, InetAddress.getByName("192.168.1.146"));
+    public void start() throws IOException {
+        serverSocket = new ServerSocket(this.port, 1, InetAddress.getByName("192.168.1.146"));
 
-        keepgoing = true;
+        /*keepgoing = true;
 
 
             clientSocket = serverSocket.accept();
@@ -31,7 +32,7 @@ public class Server implements Runnable {
             System.out.println(greeting);
 
             Scanner keyboard = new Scanner(System.in);
-            out.println(keyboard.nextLine());
+            out.println(keyboard.nextLine());*/
     }
 
     public void stop() throws IOException {
@@ -41,11 +42,15 @@ public class Server implements Runnable {
         serverSocket.close();
     }
 
+    public void setPort(int port) {
+        this.port = port;
+    }
 
     @Override
     public void run() {
         try {
-            start(6666);
+            start();
+            System.out.println("Server started at port: " + this.port);
         } catch (IOException e) {
             e.printStackTrace();
         }
