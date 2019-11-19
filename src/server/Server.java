@@ -30,13 +30,6 @@ public class Server {
             System.out.println(greeting);
             Scanner keyboard = new Scanner(System.in);
             out.println(keyboard.nextLine());
-
-
-            /*if ("hello server".equals(greeting)) {
-                out.println("hello client");
-            } else {
-                out.println("unrecognised greeting");
-            }*/
         }
         stop();
     }
