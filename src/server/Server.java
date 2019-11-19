@@ -1,5 +1,6 @@
 package server;
 
+import gesprek.Bericht;
 import gesprek.Gesprek;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,19 +33,27 @@ public class Server implements Runnable {
         clientSocket = serverSocket.accept();
     }
 
-    public void getClientMessage () throws IOException, InterruptedException {
-        //out = new PrintWriter(clientSocket.getOutputStream(), true);
+    public void setClientMessage() throws IOException {
+        out = new PrintWriter(clientSocket.getOutputStream(), true);
 
+        out.println(gesprek.geefNieuwBericht());
+
+    }
+
+    public void getClientMessage () throws IOException, InterruptedException {
 
         TimeUnit.MILLISECONDS.sleep(100);
         if ((clientSocket.getInputStream().available()> 0)) {
-            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
+            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             String greeting = in.readLine();
 
+            Bericht bericht = new Bericht(greeting,clientSocket.getLocalPort());
+
             if (!(greeting == null)) {
-                gesprek.setGesprekArrayList(greeting);
-                System.out.println(gesprek.getGesprekArrayList().get((gesprek.getGesprekArrayList().size() - 1)));
+                System.out.println(bericht.toString());
+                gesprek.setNieuweBerichten(bericht);
+                //System.out.println(gesprek.getGesprekArrayList().get((gesprek.getGesprekArrayList().size() - 1)));
             }
         }
 

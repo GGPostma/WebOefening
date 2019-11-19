@@ -31,6 +31,8 @@ public class LauncherServer {
 
             server1.getClientMessage();
             server2.getClientMessage();
+            server1.setClientMessage();
+            server2.setClientMessage();
 
         }
 

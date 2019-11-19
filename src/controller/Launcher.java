@@ -14,7 +14,8 @@ public class Launcher {
         client.startConnection("192.168.1.146",6667);
         Scanner keyboard = new Scanner(System.in);
         while (true){
-            client.sendMessage(keyboard.nextLine());
+            String message = client.sendMessage(keyboard.nextLine());
+            System.out.println(message);
         }
 
 

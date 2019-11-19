@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class Client implements Runnable {
+public class Client {
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;
@@ -21,10 +21,10 @@ public class Client implements Runnable {
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
     }
 
-    public void sendMessage(String msg) throws IOException {
+    public String sendMessage(String msg) throws IOException {
         out.println(msg);
-        /*String resp = in.readLine();
-        return resp;*/
+        String resp = in.readLine();
+        return resp;
     }
 
     public void stopConnection() throws IOException {
@@ -33,16 +33,4 @@ public class Client implements Runnable {
         clientSocket.close();
     }
 
-    @Override
-    public void run() {
-        try {
-            startConnection("192.168.1.146",6667);
-            sendMessage("test");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-
-    }
 }
