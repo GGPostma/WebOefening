@@ -1,24 +1,29 @@
 package thread;
 
-public class Thread extends java.lang.Thread {
-    private String naam;
-    private int aantal;
-    private int kolom;
-    private String s;
+import client.Client;
+import server.Server;
 
-    public Thread(String threadName, String naam, int aantal, int kolom) {
-        super(threadName);
-        this.naam = naam;
-        this.aantal = aantal;
-        s = " ";
-        for (int j = 0; j < kolom; j++)
-            s = "\t" + s;
-        s = s + "x";
+import java.io.IOException;
+
+public class Thread extends java.lang.Thread {
+
+
+    public Thread() {
+
     }
+
+    public Thread(Client client) {
+        client.run();
+
+    }
+
+    public Thread(Server server) throws IOException {
+     server.run();
+    }
+
 
     public void run() {
-        for (int i = 0; i < aantal; i++) {
-            System.out.println(naam + i + s);
-        }
+        //System.out.println("My thread is in running state.");
     }
+
 }

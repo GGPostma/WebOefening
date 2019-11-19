@@ -1,5 +1,6 @@
 package controller;
 
+import client.Client;
 import server.Server;
 import thread.Thread;
 
@@ -10,12 +11,17 @@ public class Launcher {
 
     public static void main(String[] args) throws IOException {
         Server server = new Server();
-        System.out.println("Starting server");
-        server.start(6666);
+       /* System.out.println("Starting server");
+        server.start(6666);*/
 
-        thread.Thread thread1 = new Thread("taakA","A",10,1);
+        Client client = new Client();
 
-        thread1.start();
+        Thread serverThread = new Thread(server);
+        Thread clientThread = new Thread(client);
+
+        clientThread.start();
+        serverThread.start();
+
 
 
     }

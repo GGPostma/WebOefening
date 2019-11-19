@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class Client {
+public class Client implements Runnable {
     private Socket clientSocket;
     private PrintWriter out;
     private BufferedReader in;
@@ -31,5 +31,17 @@ public class Client {
         in.close();
         out.close();
         clientSocket.close();
+    }
+
+    @Override
+    public void run() {
+        try {
+            startConnection("192.168.1.148",6667);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
     }
 }

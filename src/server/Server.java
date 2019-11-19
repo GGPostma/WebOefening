@@ -9,7 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Server {
+public class Server implements Runnable {
     private ServerSocket serverSocket;
     private Socket clientSocket;
     private PrintWriter out;
@@ -21,17 +21,17 @@ public class Server {
 
         keepgoing = true;
 
-        while(keepgoing) {
+
             clientSocket = serverSocket.accept();
-            out = new PrintWriter(clientSocket.getOutputStream(), true);
-            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+           out = new PrintWriter(clientSocket.getOutputStream(), true);
+           in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
             String greeting = in.readLine();
             System.out.println(greeting);
+
             Scanner keyboard = new Scanner(System.in);
             out.println(keyboard.nextLine());
-        }
-        stop();
     }
 
     public void stop() throws IOException {
@@ -42,4 +42,12 @@ public class Server {
     }
 
 
+    @Override
+    public void run() {
+        try {
+            start(6666);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
