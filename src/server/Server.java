@@ -25,7 +25,7 @@ public class Server implements Runnable {
     }
 
     public void start() throws IOException {
-        serverSocket = new ServerSocket(this.port, 1, InetAddress.getByName("192.168.1.146"));
+        serverSocket = new ServerSocket(this.port, 1, InetAddress.getByName("192.168.2.9"));
         keepgoing = true;
     }
 
@@ -34,27 +34,26 @@ public class Server implements Runnable {
     }
 
     public void setClientMessage() throws IOException {
+
         out = new PrintWriter(clientSocket.getOutputStream(), true);
-
-        out.println(gesprek.geefNieuwBericht());
-
+        Bericht output = gesprek.geefNieuwBericht(clientSocket.getLocalPort());
+        if (!(output == null)){
+            out.println(output);
+            System.out.println(output);
+        }
     }
+
 
     public void getClientMessage () throws IOException, InterruptedException {
 
         TimeUnit.MILLISECONDS.sleep(100);
         if ((clientSocket.getInputStream().available()> 0)) {
-
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             String greeting = in.readLine();
 
             Bericht bericht = new Bericht(greeting,clientSocket.getLocalPort());
-
-            if (!(greeting == null)) {
-                System.out.println(bericht.toString());
-                gesprek.setNieuweBerichten(bericht);
-                //System.out.println(gesprek.getGesprekArrayList().get((gesprek.getGesprekArrayList().size() - 1)));
-            }
+            System.out.println(bericht.toString());
+            gesprek.setNieuweBerichten(bericht);
         }
 
     }

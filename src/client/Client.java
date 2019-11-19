@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.concurrent.TimeUnit;
 
 public class Client {
     private Socket clientSocket;
@@ -21,10 +22,18 @@ public class Client {
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
     }
 
-    public String sendMessage(String msg) throws IOException {
+    public void sendMessage(String msg) throws IOException {
         out.println(msg);
-        String resp = in.readLine();
-        return resp;
+    }
+
+    public void receiveMessage () throws IOException, InterruptedException {
+
+        TimeUnit.MILLISECONDS.sleep(100);
+
+        if ((clientSocket.getInputStream().available()> 0)) {
+            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+            System.out.println(in.readLine());
+        }
     }
 
     public void stopConnection() throws IOException {

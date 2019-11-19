@@ -15,7 +15,7 @@ public class LauncherServer {
         Server server1 = new Server(gesprek);
         Server server2 = new Server(gesprek);
 
-        server1.setPort(6666);
+       // server1.setPort(6666);
         server2.setPort(6667);
 
         Thread serverThread1 = new Thread(server1);
@@ -29,9 +29,9 @@ public class LauncherServer {
 
         while (keepgoing){
 
-            server1.getClientMessage();
+           // server1.getClientMessage();
             server2.getClientMessage();
-            server1.setClientMessage();
+         //   server1.setClientMessage();
             server2.setClientMessage();
 
         }
