@@ -18,10 +18,10 @@ public class LauncherServer {
        // server1.setPort(6666);
         server2.setPort(6667);
 
-        Thread serverThread1 = new Thread(server1);
+       // Thread serverThread1 = new Thread(server1);
         Thread serverThread2 = new Thread(server2);
 
-        server1.getClientConnection();
+        //server1.getClientConnection();
         server2.getClientConnection();
 
 

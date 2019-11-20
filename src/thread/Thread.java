@@ -1,15 +1,21 @@
 package thread;
 
 import client.Client;
+import client.Keyboard;
 import server.Server;
 
 import java.io.IOException;
+import java.security.Key;
 
 public class Thread extends java.lang.Thread {
 
 
     public Thread() {
 
+    }
+
+    public Thread (Keyboard keyboard){
+        keyboard.run();
     }
 
 

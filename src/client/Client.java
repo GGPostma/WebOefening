@@ -1,5 +1,7 @@
 package client;
 
+import gesprek.Bericht;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -22,18 +24,26 @@ public class Client {
         in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
     }
 
-    public void sendMessage(String msg) throws IOException {
-        out.println(msg);
+    public void sendMessage(Keyboard keyboard) throws IOException {
+            out = new PrintWriter(clientSocket.getOutputStream(), true);
+            String output = keyboard.geefNieuwKeyboardBericht();
+            if (!(output == null)){
+                out.println(output);
+                System.out.println(output);
+            }
+
     }
 
     public void receiveMessage () throws IOException, InterruptedException {
 
-        TimeUnit.MILLISECONDS.sleep(100);
+            TimeUnit.MILLISECONDS.sleep(100);
 
-        if ((clientSocket.getInputStream().available()> 0)) {
-            in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            System.out.println(in.readLine());
-        }
+            if ((clientSocket.getInputStream().available()> 0)) {
+                in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                System.out.println(in.readLine());
+            }
+
+
     }
 
     public void stopConnection() throws IOException {

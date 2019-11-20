@@ -25,7 +25,7 @@ public class Server implements Runnable {
     }
 
     public void start() throws IOException {
-        serverSocket = new ServerSocket(this.port, 1, InetAddress.getByName("192.168.2.9"));
+        serverSocket = new ServerSocket(this.port, 1, InetAddress.getByName("192.168.1.146"));
         keepgoing = true;
     }
 
